@@ -92,8 +92,8 @@ profileHTML=f"""
                             <span class="card-title">About me</span>
                             <p>{profileDescription}</p>
                             <div class="card-action">
-                            <a href="{linkedInLink}" class="blue-text text-darken-3"><i class="fa-brands fa-linkedin fa-2xl"></i></i></a>
-                            <a href="{githubLink}" class="blue-text text-darken-3"><i class="fa-brands fa-github fa-2xl"></i></a>
+                            <a href="{linkedInLink}" target="_blank" rel="noopener noreferrer" class="blue-text text-darken-3"><i class="fa-brands fa-linkedin fa-2xl"></i></i></a>
+                            <a href="{githubLink}" target="_blank" rel="noopener noreferrer" class="blue-text text-darken-3"><i class="fa-brands fa-github fa-2xl"></i></a>
                             </div>
                         </div>
                     </div>
@@ -184,7 +184,7 @@ with tabPortfolio:
                 <div class="col s12 m6">
                     <div class="card large">                    
                         <div class="card-image" style="height:200px">
-                            <a href="{projectLink}"><img src="{projectImageUrl}"></a>
+                            <a href="{projectLink}" target="_blank" rel="noopener noreferrer"><img src="{projectImageUrl}"></a>
                         </div>                        
                         <div class="card-content">
                             <span class="card-title">{projectName}</span>                                                        
@@ -201,7 +201,7 @@ with tabPortfolio:
                             </div>
                         </div>  
                         <div class="card-action right-align">
-                        <a href="{projectLink}" class="waves-effect waves-light btn-large white-text blue darken-3"><i class="material-icons left">open_in_new</i>View</a>                        
+                        <a href="{projectLink}" target="_blank" rel="noopener noreferrer" class="waves-effect waves-light btn-large white-text blue darken-3"><i class="material-icons left">open_in_new</i>View</a>                        
                         </div>                                               
                     </div>
                 </div>
