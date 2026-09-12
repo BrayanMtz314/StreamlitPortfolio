@@ -1,0 +1,1 @@
+This portfolio was created using the "El loco de los Datos" Streamlit portfolio template; you can find more details in the [video about the Streamlit portfolio](https://www.youtube.com/watch?v=MaJzjB1ntZI&t=548s) 
