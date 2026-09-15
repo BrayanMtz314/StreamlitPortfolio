@@ -39,6 +39,38 @@ button[data-baseweb="tab"] p{
     font-size: 20px  !important;
 }
 
+body {
+    font-size: 18px !important;
+}
+
+p {
+    font-size: 18px !important;
+}
+
+h1 {
+    font-size: 3rem !important;
+}
+
+h5 {
+    font-size: 1.6rem !important;
+}
+
+.card-title {
+    font-size: 1.8rem !important;
+}
+
+.card-content {
+    font-size: 18px !important;
+}
+
+.chip {
+    font-size: 16px !important;
+}
+
+button[data-baseweb="tab"] p {
+    font-size: 22px !important;
+}
+
 /* Remueve el espacio en el encabezado por defecto de las apps de Streamlit */
 .block-container, div[data-testid="stAppViewBlockContainer"], div[data-testid="stAppViewContainer"] {
     padding-top: 0px !important;
@@ -62,6 +94,7 @@ tblprofile = api.table(AIRTABLE_BASE_ID, 'Profile')
 tblprojects = api.table(AIRTABLE_BASE_ID, 'Projects')
 tblskills = api.table(AIRTABLE_BASE_ID, 'Skills')
 tblContacts = api.table(AIRTABLE_BASE_ID, 'Contacts')
+tblCertificates = api.table(AIRTABLE_BASE_ID, 'Certificates')
 
 # Cargamos los valores recuperados de las tablas
 
@@ -106,7 +139,7 @@ profileHTML=f"""
 st.html(profileHTML)
 
 # Creamos los tabs de Streamlit
-tabSkils,tabPortfolio,tabContact =st.tabs(['My skills','My projects','Contact'])
+tabSkils,tabPortfolio, tabCertificates, tabContact =st.tabs(['My skills','My projects', 'My certificates', 'Contact'])
 
 # Mostramos el tab de Skills
 with tabSkils:
@@ -158,6 +191,8 @@ with tabSkils:
         """     
     # Mostramos los skills
     st.html(skillsHTML) 
+    
+    
 with tabPortfolio:       
     projects=""
     skillsHTML=""
@@ -213,7 +248,113 @@ with tabPortfolio:
             </div>       
         """     
     # Mostramos los proyectos
-    st.html(projectsHTML)        
+    st.html(projectsHTML)     
+    
+    
+with tabCertificates:
+
+    certificates = ""
+
+    # Recorremos todos los certificados de Airtable
+    for certificate in tblCertificates.all():
+
+        certificate = certificate['fields']
+
+        # Obtenemos los datos del certificado
+        certificateName = certificate['Name']
+        certificateInstitution = certificate['Institution']
+        certificateDescription = certificate['Description']
+
+        # Knowledge
+        certificateKnowledge = certificate['Knowledge']
+
+        knowledgeHTML = [
+            f'<div class="chip blue lighten-4">{knowledge}</div>'
+            for knowledge in certificateKnowledge
+        ]
+
+        knowledgeHTML = "".join(knowledgeHTML)
+
+        # Link e imagen
+        certificateLink = certificate['Link']
+        certificateImageUrl = certificate['Image'][0]['url']
+
+        # Plantilla del certificado
+        certificateHTML = f"""
+            <div class="col s12 m6">
+
+                <div class="card large">
+
+                    <div class="card-image" style="height:200px">
+
+                        <a href="{certificateLink}"
+                           target="_blank"
+                           rel="noopener noreferrer">
+
+                            <img src="{certificateImageUrl}">
+
+                        </a>
+
+                    </div>
+
+                    <div class="card-content">
+
+                        <span class="card-title">
+                            {certificateName}
+                        </span>
+
+                        <h6>
+                            <b>{certificateInstitution}</b>
+                        </h6>
+
+                        <p>
+                            {certificateDescription}
+                        </p>
+
+                        <div class="row hide-on-small-only">
+
+                            <div class="col s12">
+
+                                <h6>Knowledge:</h6>
+
+                                {knowledgeHTML}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="card-action right-align">
+
+                        <a href="{certificateLink}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="waves-effect waves-light btn-large white-text blue darken-3">
+
+                            <i class="material-icons left">verified</i>
+                            View certificate
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        """
+
+        certificates = certificates + certificateHTML
+
+    certificatesHTML = f"""
+        <div class="row">
+            {certificates}
+        </div>
+    """
+
+    # Mostramos los certificados
+    st.html(certificatesHTML)    
+       
 with tabContact:
     st.info("If you think I can help you with some of your projects or entrepreneurships, send me a message I'll contact you as soon as I can. I'm always glad to help")
     with st.container(border=True):
