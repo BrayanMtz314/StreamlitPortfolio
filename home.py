@@ -25,26 +25,46 @@ st.markdown('<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6
 # Adicionamos estilos personalizados para mejorar el diseño
 customStyle = """
 <style type="text/css">
-/* Aumenta el tamaño de las cards */
+
+/* Project and certificate cards */
 .card.large {
-    height: 550px !important;
+    min-height: 550px !important;
+    height: auto !important;
 }
-/* Aumenta el contenido disponible */
+
 .card.large .card-content {
-    max-height: fit-content !important;
+    height: auto !important;
+    max-height: none !important;
+}
+
+/* Descriptions */
+.card-content p {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+}
+
+/* Skill cards */
+.card.small {
+    height: auto !important;
+    min-height: 300px;
+}
+
+/* Better spacing for cards */
+.card {
+    overflow: visible !important;
 }
 
 /* Aumenta la fuente de los tabs de Streamlit */
 button[data-baseweb="tab"] p{
-    font-size: 20px  !important;
+    font-size: 18px  !important;
 }
 
 body {
-    font-size: 18px !important;
+    font-size: 16px !important;
 }
 
 p {
-    font-size: 18px !important;
+    font-size: 16px !important;
 }
 
 h1 {
@@ -52,24 +72,13 @@ h1 {
 }
 
 h5 {
-    font-size: 1.6rem !important;
-}
-
-.card-title {
-    font-size: 1.8rem !important;
-}
-
-.card-content {
-    font-size: 18px !important;
+    font-size: 1.5rem !important;
 }
 
 .chip {
-    font-size: 16px !important;
+    font-size: 14px !important;
 }
 
-button[data-baseweb="tab"] p {
-    font-size: 22px !important;
-}
 
 /* Remueve el espacio en el encabezado por defecto de las apps de Streamlit */
 .block-container, div[data-testid="stAppViewBlockContainer"], div[data-testid="stAppViewContainer"] {
@@ -224,7 +233,7 @@ with tabPortfolio:
                         <div class="card-content">
                             <span class="card-title">{projectName}</span>                                                        
                             <p>{projectDescription}</p>
-                            <div class="row hide-on-small-only">
+                            <div class="row">
                             <div class="col s12 m6">
                             <h6>Knowledge:</h6>
                             {knowledgeHTML}
@@ -311,7 +320,7 @@ with tabCertificates:
                             {certificateDescription}
                         </p>
 
-                        <div class="row hide-on-small-only">
+                        <div class="row">
 
                             <div class="col s12">
 
